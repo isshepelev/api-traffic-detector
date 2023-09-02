@@ -4,7 +4,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.isshepelev.apitrafficdetector.entity.Detector;
-import ru.isshepelev.apitrafficdetector.service.DetectorService;
+import ru.isshepelev.apitrafficdetector.entity.dto.DetectorActivate;
+import ru.isshepelev.apitrafficdetector.entity.dto.DetectorInitialized;
+import ru.isshepelev.apitrafficdetector.service.impl.DetectorServiceImpl;
 
 import java.util.List;
 
@@ -12,9 +14,9 @@ import java.util.List;
 @RequestMapping("/api/detector")
 public class DetectorController {
 
-    private final DetectorService detectorService;
+    private final DetectorServiceImpl detectorService;
 
-    public DetectorController(DetectorService detectorService) {
+    public DetectorController(DetectorServiceImpl detectorService) {
         this.detectorService = detectorService;
     }
 
@@ -25,10 +27,27 @@ public class DetectorController {
         return new ResponseEntity<>(detectorList, HttpStatus.OK);
     }
 
-//    @PutMapping("/initialized")
-//    public ResponseEntity<Void> initialized(@RequestBody ){
-//
-//
-//        return ResponseEntity.noContent().build();
-//    }
+    @PutMapping("/initialized")
+    public ResponseEntity<Void> initialized(@RequestBody DetectorInitialized detectorInitialized){
+        detectorService.initialize(detectorInitialized);
+        return ResponseEntity.noContent().build();
+    }
+
+
+    @PutMapping("/active/{serialNumber}")
+    public ResponseEntity<Void> active(@RequestBody DetectorActivate detectorActivate,
+                                       @PathVariable String serialNumber){
+        detectorService.active(detectorActivate, serialNumber);
+        return ResponseEntity.noContent().build();
+    }
+    @PutMapping("/setup/{serialNumber}")
+    public ResponseEntity<Void> setup(@PathVariable String serialNumber){
+        detectorService.setting(serialNumber);
+        return ResponseEntity.noContent().build();
+    }
+    @PutMapping("/reset/{serialNumber}")
+    public ResponseEntity<Detector> reset(@PathVariable String serialNumber){
+        detectorService.reset(serialNumber);
+        return ResponseEntity.noContent().build();
+    }
 }
