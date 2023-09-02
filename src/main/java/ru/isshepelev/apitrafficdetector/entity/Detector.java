@@ -14,7 +14,7 @@ public class Detector {
     private String serialNumber;
     private State state;
     private String model;
-    private State address;
+    private String address;
     private GpsCoordinate location;
     private Zone zone;
     private ConformityCertificate conformityCertificate;
