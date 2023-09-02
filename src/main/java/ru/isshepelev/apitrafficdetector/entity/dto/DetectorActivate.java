@@ -6,7 +6,7 @@ import ru.isshepelev.apitrafficdetector.entity.Zone;
 
 @Data
 public class DetectorActivate {
-    private  String address;
+    private String address;
     private GpsCoordinate location;
     private Zone zone;
 }
