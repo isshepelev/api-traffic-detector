@@ -1,10 +1,10 @@
 version: "3.9"
 services:
-  postgres:
-    image: postgres
-    environment:
-      POSTGRES_DB: "api-traffic-detector"
-      POSTGRES_USER: "postgres"
-      POSTGRES_PASSWORD: "postgres"
+  mongo:
+    container_name: mongo-db
+    image: mongo
+    restart: always
     ports:
-      - "5432:5432"
+      - "27017:27017"
+    volumes:
+      - ./mongoVolume:/data/db
