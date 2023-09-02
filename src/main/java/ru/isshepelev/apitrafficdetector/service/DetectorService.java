@@ -1,20 +1,13 @@
 package ru.isshepelev.apitrafficdetector.service;
 
-import org.springframework.stereotype.Service;
 import ru.isshepelev.apitrafficdetector.entity.Detector;
-import ru.isshepelev.apitrafficdetector.repository.DetectorRepository;
+import ru.isshepelev.apitrafficdetector.entity.dto.DetectorActivate;
+import ru.isshepelev.apitrafficdetector.entity.dto.DetectorInitialized;
 
 import java.util.List;
 
-@Service
-public class DetectorService {
-    private final DetectorRepository detectorRepository;
-
-    public DetectorService(DetectorRepository detectorRepository) {
-        this.detectorRepository = detectorRepository;
-    }
-
-    public List<Detector> getAllDetector() {
-        return detectorRepository.findAll();
-    }
+public interface DetectorService {
+    List<Detector> getAllDetector();
+    void initialize(DetectorInitialized detectorInitialized);
+    void active(DetectorActivate detectorActivate, String serialNumber);
 }
