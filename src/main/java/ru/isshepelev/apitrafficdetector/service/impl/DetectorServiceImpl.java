@@ -1,5 +1,6 @@
 package ru.isshepelev.apitrafficdetector.service.impl;
 
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
 import ru.isshepelev.apitrafficdetector.entity.Detector;
 import ru.isshepelev.apitrafficdetector.entity.State;
@@ -9,6 +10,7 @@ import ru.isshepelev.apitrafficdetector.repository.DetectorRepository;
 import ru.isshepelev.apitrafficdetector.service.DetectorService;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -21,11 +23,15 @@ public class DetectorServiceImpl implements DetectorService {
 
     @Override
     public List<Detector> getAllDetector() {
-        return detectorRepository.findAll();
+        List<Detector> detectors =detectorRepository.findAll();
+        if (detectors.isEmpty()){
+            throw new NoSuchElementException();
+        }
+        return detectors;
     }
 
     @Override
-    public void initialize(DetectorInitialized detectorInitialized) {
+    public void initialize(@Valid DetectorInitialized detectorInitialized) {
         if (detectorInitialized != null){
             Detector detector = new Detector();
             detector.setSerialNumber(detectorInitialized.getSerialNumber());
@@ -38,7 +44,7 @@ public class DetectorServiceImpl implements DetectorService {
     }
 
     @Override
-    public void active(DetectorActivate detectorActivate, String serialNumber) {
+    public void active(@Valid DetectorActivate detectorActivate,@Valid String serialNumber) {
         Optional<Detector> detectorOptional = detectorRepository.findById(serialNumber);
         if (detectorOptional.isPresent()){
             Detector detector = detectorOptional.get();
@@ -51,15 +57,16 @@ public class DetectorServiceImpl implements DetectorService {
 
     }
 
-    public void setting(String serialNumber) {
+    public void setting(@Valid String serialNumber) {
         Optional<Detector> detectorOptional = detectorRepository.findById(serialNumber);
         if (detectorOptional.isPresent()){
             Detector detector = detectorOptional.get();
             detector.setState(State.SETUP);
+            detectorRepository.save(detector);
         }else new IllegalArgumentException();
     }
 
-    public void reset(String serialNumber) {
+    public void reset(@Valid String serialNumber) {
         Optional<Detector> detectorOptional = detectorRepository.findById(serialNumber);
         if (detectorOptional.isPresent()){
             Detector detector = detectorOptional.get();

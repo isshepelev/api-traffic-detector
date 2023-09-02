@@ -1,5 +1,6 @@
 package ru.isshepelev.apitrafficdetector.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,14 +29,14 @@ public class DetectorController {
     }
 
     @PutMapping("/initialized")
-    public ResponseEntity<Void> initialized(@RequestBody DetectorInitialized detectorInitialized){
+    public ResponseEntity<Void> initialized(@RequestBody @Valid DetectorInitialized detectorInitialized){
         detectorService.initialize(detectorInitialized);
         return ResponseEntity.noContent().build();
     }
 
 
     @PutMapping("/active/{serialNumber}")
-    public ResponseEntity<Void> active(@RequestBody DetectorActivate detectorActivate,
+    public ResponseEntity<Void> active(@RequestBody @Valid DetectorActivate detectorActivate,
                                        @PathVariable String serialNumber){
         detectorService.active(detectorActivate, serialNumber);
         return ResponseEntity.noContent().build();
