@@ -10,6 +10,10 @@ import java.util.NoSuchElementException;
 @RestControllerAdvice
 public class DetectorExceptionHandler {
     @ExceptionHandler(NoSuchElementException.class)
+    public ResponseEntity<String> NoSuchElementException() {
+        return new ResponseEntity<>("Список детекторов пуст", HttpStatus.OK);
+    }
+    @ExceptionHandler(NullPointerException.class)
     public ResponseEntity<String> NullPointerException(){
         return  new ResponseEntity<>("Ошибка в параметрах запроса. Запрос не следует повторять",
                 HttpStatus.BAD_REQUEST);
