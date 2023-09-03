@@ -4,8 +4,8 @@ import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
 import ru.isshepelev.apitrafficdetector.entity.Detector;
 import ru.isshepelev.apitrafficdetector.entity.State;
-import ru.isshepelev.apitrafficdetector.entity.dto.DetectorActivate;
-import ru.isshepelev.apitrafficdetector.entity.dto.DetectorInitialized;
+import ru.isshepelev.apitrafficdetector.dto.DetectorActivate;
+import ru.isshepelev.apitrafficdetector.dto.DetectorInitialized;
 import ru.isshepelev.apitrafficdetector.repository.DetectorRepository;
 import ru.isshepelev.apitrafficdetector.service.DetectorService;
 
