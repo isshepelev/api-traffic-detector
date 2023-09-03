@@ -1,4 +1,4 @@
-package ru.isshepelev.apitrafficdetector.entity.dto;
+package ru.isshepelev.apitrafficdetector.dto;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Size;

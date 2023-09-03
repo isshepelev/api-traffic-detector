@@ -5,8 +5,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.isshepelev.apitrafficdetector.entity.Detector;
-import ru.isshepelev.apitrafficdetector.entity.dto.DetectorActivate;
-import ru.isshepelev.apitrafficdetector.entity.dto.DetectorInitialized;
+import ru.isshepelev.apitrafficdetector.dto.DetectorActivate;
+import ru.isshepelev.apitrafficdetector.dto.DetectorInitialized;
 import ru.isshepelev.apitrafficdetector.service.impl.DetectorServiceImpl;
 
 import java.util.List;

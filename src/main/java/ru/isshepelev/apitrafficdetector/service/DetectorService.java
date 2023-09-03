@@ -1,8 +1,8 @@
 package ru.isshepelev.apitrafficdetector.service;
 
 import ru.isshepelev.apitrafficdetector.entity.Detector;
-import ru.isshepelev.apitrafficdetector.entity.dto.DetectorActivate;
-import ru.isshepelev.apitrafficdetector.entity.dto.DetectorInitialized;
+import ru.isshepelev.apitrafficdetector.dto.DetectorActivate;
+import ru.isshepelev.apitrafficdetector.dto.DetectorInitialized;
 
 import java.util.List;
 
